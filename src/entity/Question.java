@@ -65,7 +65,7 @@ public class Question {
 	}
 	
 	private void populateAttributes() {
-		body = html.substring(html.indexOf("q-question-body") - 12);
+		body = "<meta charset=\"utf-8\">" + html.substring(html.indexOf("q-question-body") - 12);
 		String header = html.substring(0, html.indexOf("q-question-body") - 12);
 		
 		id = find(header, "q-id", 6, "<", 1).trim();// procura o id da questão e elimina os espaços em branco
@@ -124,5 +124,10 @@ public class Question {
 			pollutedString = pollutedString.replace("<" + cleanString + ">", "");
 		}
 		return pollutedString.replace(" ,    ", ", ").strip();
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("Prova: %s / Ano: %s / Banca: %s / Órgão: %s / Matéria: %s / Assunto: %s", prova, ano, banca, orgao, materia, assunto);
 	}
 }

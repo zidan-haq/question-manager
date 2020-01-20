@@ -54,7 +54,7 @@ public class ViewAdicionarQuestoesController implements Initializable, DataChang
 	public void createTabs() {
 		TabPaneManager tabPaneManager = new TabPaneManager();
 		tabPane.getTabs().clear();
-		tabPane.getTabs().addAll(tabPaneManager.createTabs());
+		tabPaneManager.createTabs(tabPane);
 	}
 	
 	@Override

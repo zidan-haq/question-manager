@@ -73,7 +73,7 @@
             <Font name="Noto Sans Regular" size="13.0" />
          </font>
       </Button>
-      <TabPane fx:id="tabPane" layoutX="111.0" layoutY="163.0" prefHeight="391.0" prefWidth="1011.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="163.0">
+      <TabPane fx:id="tabPane" layoutX="111.0" layoutY="163.0" prefHeight="391.0" prefWidth="1011.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="163.0">
          <tabs>
             <Tab text="1">
                <content>
@@ -149,20 +149,6 @@
             </Tab>
          </tabs>
       </TabPane>
-      <HBox layoutX="869.0" layoutY="548.0" spacing="20.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="30.0">
-         <children>
-            <Button mnemonicParsing="false" style="-fx-background-color: #dddddd;" text="Copiar">
-               <font>
-                  <Font name="Noto Sans Regular" size="13.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #dddddd;" text="Salvar">
-               <font>
-                  <Font name="Noto Sans Regular" size="13.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
    </children>
    <opaqueInsets>
       <Insets />
