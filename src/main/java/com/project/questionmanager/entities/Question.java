@@ -1,15 +1,23 @@
 package com.project.questionmanager.entities;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.Serializable;
 
-import com.project.questionmanager.gui.util.Alerts;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
-import javafx.scene.control.Alert.AlertType;
+import com.project.questionmanager.managers.html.HTMLToQuestion;
 
-public class Question {
+@Entity
+public class Question implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	@Transient
+	HTMLToQuestion htmlToQuestion = new HTMLToQuestion();
+	
+	@Id
 	private String id;
 	private String prova;
 	private String ano;
@@ -18,15 +26,35 @@ public class Question {
 	private String materia;
 	private String assunto;
 	
+	@Column(nullable = true, columnDefinition = "TEXT")
 	private String body;
-
-	private String html;
 	
-	public Question(File question) {
-		readQuestion(question);
-		populateAttributes();
+	public Question() {
 	}
 	
+	public Question(File question) {
+		htmlToQuestion.readQuestion(question);
+		id = htmlToQuestion.getId();
+		prova = htmlToQuestion.getProva();
+		ano = htmlToQuestion.getAno();
+		banca = htmlToQuestion.getBanca();
+		orgao = htmlToQuestion.getOrgao();
+		materia = htmlToQuestion.getMateria();
+		assunto = htmlToQuestion.getAssunto();
+		body = htmlToQuestion.getBody();
+	}
+	
+	public Question(String id, String prova, String ano, String banca, String orgao, String materia, String assunto, String body) {
+		this.id = id;
+		this.prova = prova;
+		this.ano = ano;
+		this.banca = banca;
+		this.orgao = orgao;
+		this.materia = materia;
+		this.assunto = assunto;
+		this.body = body;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -51,84 +79,34 @@ public class Question {
 	public String getBody() {
 		return body;
 	}
-	
-	
-	public void readQuestion(File question) {
-		try(BufferedReader br = new BufferedReader(new FileReader(question))){
-			String aux = br.readLine();
-			while(aux != null) {
-				html += aux;
-				aux = br.readLine();
-			}
-		} catch(IOException e) {
-			new Alerts().showAlert(AlertType.ERROR, "Erro", "IOException", e.getMessage(), false);
-		}
-	}
-	
-	private void populateAttributes() {
-		body = "<meta charset=\"utf-8\">" + html.substring(html.indexOf("q-question-body") - 12);
-		String header = html.substring(0, html.indexOf("q-question-body") - 12);
-		
-		id = find(header, "q-id", 6, "<", 1).trim();// procura o id da questão e elimina os espaços em branco
-		prova = find(header, "<strong>Prova: </strong>", 24, "<", 1).strip();// procura a prova e elimina espaçoes em braco no inicio e final da string
-		ano = find(header, "<strong>Ano: </strong>", 22, "<", 1).strip();
-		banca = find(header, "<strong>Banca: </strong>", 24, "<", 1).strip();
-		orgao = find(header, "<strong>Órgão: </strong>", 24, "<", 1).strip();
-		materia = find(header, "q-question-breadcrumb", 23, "<", 1).strip();
-		assunto = findAssunto(header, "q-arrow-separator", 19, "q-question-info", 15);
-	}
-	
-	/**
-	 * @param text - é o texto que será tratado
-	 * @param beginIndex - valor antes da string procurada
-	 * @param beginLenght - tamanho da string acima mais as poluições que houverem ao lado dela, a sequencia definida não será retornada pelo método
-	 * @param endIndex - valor depois do fim da string procurada
-	 * @param endLenght - tamanho da string acima
-	 * @return - retorna a string que fica entre o beginIndex (+ beginLenght) e o endIndex
-	 */
-	private String find(String text, String beginIndex, int beginLenght,  String endIndex, int endLenght) {
-			int start = text.indexOf(beginIndex) + beginLenght;
-			
-			if(start == -1 || text.indexOf(endIndex) == -1) {
-				return "";
-			}
-			
-			String character = "";
 
-			while (!character.equals(endIndex)) {
-				start++;
-				character = text.substring(start, start + endLenght);
-			}
-			
-			return text.substring(text.indexOf(beginIndex) + beginLenght, start);
-	}
-	
-	//A diferença deste método para o anterior está no fato deste antes de retornar a string limpar todos os campos que estão entre "<" e ">"
-	private String findAssunto(String text, String beginIndex, int beginLenght,  String endIndex, int endLenght) {
-		int start = text.indexOf(beginIndex) + beginLenght;
-		
-		if(start == -1 || text.indexOf(endIndex) == -1) {
-			return "";
-		}
-		
-		String character = "";
-
-		while (!character.equals(endIndex)) {
-			start++;
-			character = text.substring(start, start + endLenght);
-		}
-		
-		String pollutedString = text.substring(text.indexOf(beginIndex) + beginLenght, start) + ">";
-		String cleanString = "";
-		while(pollutedString.contains("<")) {
-			cleanString = find(pollutedString, "<", 1, ">", 1);
-			pollutedString = pollutedString.replace("<" + cleanString + ">", "");
-		}
-		return pollutedString.replace(" ,    ", ", ").strip();
-	}
-	
 	@Override
 	public String toString() {
 		return String.format("Prova: %s / Ano: %s / Banca: %s / Órgão: %s / Matéria: %s / Assunto: %s", prova, ano, banca, orgao, materia, assunto);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Question other = (Question) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 }

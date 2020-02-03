@@ -1,0 +1,21 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007f93e8f47d15, pid=2143, tid=2161
+#
+# JRE version: OpenJDK Runtime Environment (11.0.6+10) (build 11.0.6+10)
+# Java VM: OpenJDK 64-Bit Server VM (11.0.6+10, mixed mode, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# C  [libjimage.so+0x2d15]
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %e" (or dumping to /home/manjaro/eclipse-workspace/question-manager/core.2143)
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:43233 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=40863 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=localhost -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Djava.security.egd=file:/dev/./urandom --module-path=/home/manjaro/biblioteca java/javafx-sdk-11.0.2/lib/ --add-modules=javafx.controls,javafx.base,javafx.fxml,javafx.graphics,javafx.web -Xverify:none -XX:TieredStopAtLevel=1 -Dspring.boot.project.name=question-manager -Dfile.encoding=UTF-8 com.project.questionmanager.QuestionManagerApplication
+
+Host: 

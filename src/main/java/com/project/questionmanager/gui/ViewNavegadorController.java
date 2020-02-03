@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 import com.project.questionmanager.gui.listeners.DataChangeListener;
 import com.project.questionmanager.gui.util.Alerts;
-import com.project.questionmanager.managers.HTMLTreatment;
+import com.project.questionmanager.managers.html.HTMLTreatment;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -85,7 +85,7 @@ public class ViewNavegadorController implements Initializable, ClipboardOwner{
 	
 	private void notifyDataChangeListeners() {
 		for(DataChangeListener listener : dataChangeListeners) {
-			listener.onDataChaged();
+			listener.onDataChanged();
 		}
 	}
 

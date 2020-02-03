@@ -1,4 +1,4 @@
-package com.project.questionmanager.managers;
+package com.project.questionmanager.managers.html;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.project.questionmanager.gui.util.Alerts;
+import com.project.questionmanager.managers.Configuration;
 
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.web.WebView;

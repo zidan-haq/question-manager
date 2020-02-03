@@ -1,0 +1,34 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007ff9fb8afd15, pid=1823, tid=1840
+#
+# JRE version: OpenJDK Runtime Environment (11.0.6+10) (build 11.0.6+10)
+# Java VM: OpenJDK 64-Bit Server VM (11.0.6+10, mixed mode, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# C  [libjimage.so+0x2d15]
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %e" (or dumping to /home/manjaro/eclipse-workspace/question-manager/core.1823)
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:37921 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=33783 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=localhost -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Djava.security.egd=file:/dev/./urandom --module-path=/home/manjaro/biblioteca java/javafx-sdk-11.0.2/lib/ --add-modules=javafx.controls,javafx.base,javafx.fxml,javafx.graphics,javafx.web -Xverify:none -XX:TieredStopAtLevel=1 -Dspring.boot.project.name=question-manager -Dfile.encoding=UTF-8 com.project.questionmanager.QuestionManagerApplication
+
+Host: Intel(R) Core(TM) i5 CPU       M 480  @ 2.67GHz, 4 cores, 5G, Manjaro Linux
+Time: Mon Jan 27 15:25:49 2020 -03 elapsed time: 57 seconds (0d 0h 0m 57s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007ff9f4130000):  JavaThread "Signal Dispatcher" daemon [_thread_in_vm, id=1840, stack(0x00007ff9dc427000,0x00007ff9dc528000)]
+
+Stack: [0x00007ff9dc427000,0x00007ff9dc528000],  sp=0x00007ff9dc5250c0,  free space=1016k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libjimage.so+0x2d15]
+C  [libjimage.so+0x3a0e]
+C  [libjimage.so+0x3f04]  JIMAGE_FindResource+0x104
+V  [libjvm.so+0x5b57dd]
+V
